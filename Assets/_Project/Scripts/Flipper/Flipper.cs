@@ -18,9 +18,9 @@ public class Flipper : MonoBehaviour
 
     public void Flip()
     {
+        int rotationAngle = 180;
+
         IsFacingRight = !IsFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
+        transform.Rotate(0, rotationAngle, 0);
     }
 }

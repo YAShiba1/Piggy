@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class JumpChecker : MonoBehaviour
+public class GroundChecker : MonoBehaviour
 {
-    public bool CanJump { get; private set; }
+    private int _groundContactCount = 0;
+
+    public bool IsGrounded => _groundContactCount > 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Ground ground))
         {
-            CanJump = true;
+            _groundContactCount++;
         }
     }
 
@@ -16,7 +18,7 @@ public class JumpChecker : MonoBehaviour
     {
         if (collision.TryGetComponent(out Ground ground))
         {
-            CanJump = false;
+            _groundContactCount--;
         }
     }
 }

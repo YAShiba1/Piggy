@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private JumpChecker _jumpChecker;
+    [SerializeField] private GroundChecker _groundChecker;
 
     public Rigidbody2D Rigidbody2D { get; private set; }
 
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown(JumpButtonName) && _jumpChecker.CanJump)
+        if (Input.GetButtonDown(JumpButtonName) && _groundChecker.IsGrounded)
         {
             Rigidbody2D.AddForce(Vector2.up * _speed, ForceMode2D.Impulse);
         }

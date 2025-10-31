@@ -1,21 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class Enemy : BaseCharacter
 {
-    private AudioSource _audioSource;
+    [SerializeField] private PlayerChaser _playerChaser;
+    [SerializeField] private PatrolArea _patrolArea;
+    [SerializeField] private PlayerDetector _playerDetector;
 
-    private void Awake()
+    private void Update()
     {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out Player player))
+        if (_playerDetector.Detected)
         {
-            _audioSource.Play();
-            player.TakeDamage(Damage);
+            _playerChaser.Chase();
+        }
+        else
+        {
+            _patrolArea.Patrol();
         }
     }
 }
